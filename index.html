@@ -79,8 +79,6 @@ font-size: 20px;
 
 <br/>
 
-
-  
   <script>
  //   var con= document.getElementById('raw').value();
  
@@ -91,7 +89,7 @@ font-size: 20px;
     
 function cls(){
 //alert("clear");
-	  document.getElementById('raw').value="";
+	  document.getElementById('raw').value="\n\n";
 	  document.getElementById('doc').innerHTML="";
 
 		  
@@ -100,7 +98,9 @@ function cls(){
 var c = document.getElementById("raw").value
 //	alert(c)
 	var newstr = c.replace(/\n/g, ' ');
-  
+	var newstr = c.replace(/</g, '&lt;');
+  //在此处，正则表达式的末尾有个g，它表示match源字符串str中所有匹配项。
+//这里如果没有g，那么也只能匹配到第一个错别字”背景“，只有加了这个g，才能匹配到所有的”背景“。
 	  document.getElementById('doc').innerHTML=newstr;
 
 		  
@@ -129,6 +129,8 @@ function cpy() {
 </body>
 
 </html>
+
+
 
 
 
