@@ -102,6 +102,7 @@ var c = document.getElementById("raw").value
   //在此处，正则表达式的末尾有个g，它表示match源字符串str中所有匹配项。
 //这里如果没有g，那么也只能匹配到第一个错别字”背景“，只有加了这个g，才能匹配到所有的”背景“。
 	  document.getElementById('doc').innerHTML=newstr;
+     setTimeout(cpy,1000);
 
 		  
 		}//为submit绑定点击事件，将name的值在也页面弹窗显示
@@ -129,8 +130,6 @@ function cpy() {
 </body>
 
 </html>
-
-
 
 
 
