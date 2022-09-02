@@ -5,7 +5,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
- 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
@@ -40,7 +42,11 @@ font-size: 25px;
 font-size: 20px;
   
 }
-
+.wait{
+  font-size: 15px;
+  color: red;
+  text-align: center;
+}
 
 		</style>
 
@@ -64,28 +70,45 @@ font-size: 20px;
 
 
 </div>
-    <button type="button" id="copy" class="slide-two"  onclick="cpy()">copy</button>
+    <button type="button" id="copy" class="slide-two"  onclick="cpy2()">copy</button>
 
 
 
 
 <br/>
+<div class="alert alert-success" id="success-alert">
+
+  
+  <p class="wait">请等一下! </p>
+  
+</div>
+
+
 <!--...
 
 
 <textarea  rows="10" cols="30" wrap="off" style="overflow:scroll;" id = "raw2"></textarea>
 -->
-<p id ="doc" class= "p_size"></p>
+<p id ="doc" class= "p_size" onclick="cpy()"></p>
 
 <br/>
+
+
+
 
   <script>
  //   var con= document.getElementById('raw').value();
  
  
+      $(document).ready(function() {
+  $("#success-alert").hide();
+  
+});
 
-
-    
+      function showAlert() {
+    $("#success-alert").fadeTo(100, 1).slideUp(1000 );
+  }
+  
     
 function cls(){
 //alert("clear");
@@ -105,9 +128,23 @@ var c = document.getElementById("raw").value
      setTimeout(cpy,1000);
 
 		  
-		}//为submit绑定点击事件，将name的值在也页面弹窗显示
-function cpy() {
+		}
+		
+  function isChinese(temp) 
+  { 
+  var re=/[^\u4e00-\u9fa5]/; 
+  if(re.test(temp)) return false; 
+  return true; 
+  } 
+  
+
+
+		//为submit绑定点击事件，将name的值在也页面弹窗显示
+  function cpy2() {
         var Url2=document.getElementById('doc').innerText;
+        
+        
+     
         var oInput = document.createElement('input');
         oInput.value = Url2;
         document.body.appendChild(oInput);
@@ -116,6 +153,24 @@ function cpy() {
         oInput.className = 'oInput';
         oInput.style.display='none';
         console.log("复制成功");
+        
+    }
+  function cpy() {
+        var Url2=document.getElementById('doc').innerText;
+        
+        if(!(isChinese(Url2[0]))){
+        showAlert();
+        }else{
+     
+        var oInput = document.createElement('input');
+        oInput.value = Url2;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display='none';
+        console.log("复制成功");
+        }
     }
 
 
@@ -130,8 +185,6 @@ function cpy() {
 </body>
 
 </html>
-
-
 
 
 
