@@ -234,9 +234,10 @@ newstr_len = newstr.length
   
 //var count_pat = countString(newstr,'.');
 //var get_sign  = nthIndex(newstr,'.',count_pat);
+if (newstr_len>1100){
 var less_num = get_pat_pos(newstr);
 newstr = replace_pos(newstr,less_num+1,'<br /><br />');
-
+}
 //console.log(less_num);
 
 
