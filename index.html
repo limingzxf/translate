@@ -1,4 +1,5 @@
  
+ 
 <html>
 <head>
 
@@ -262,14 +263,14 @@ var c = document.getElementById("raw").value
 var s= "XYZ 123 ABC 456 ABC 789 ABC";
 //alert(s.length);
 newstr_len = newstr.length
-  console.log("string len : ",newstr_len)
+ // console.log("string len : ",newstr_len)
   
   
 //var count_pat = countString(newstr,'.');
 //var get_sign  = nthIndex(newstr,'.',count_pat);
 if (newstr_len>700){
 var less_num = get_pat_pos(newstr);
-alert("list : "+less_num);
+//alert("list : "+less_num);
 for (var i = 0 ; i < less_num.length; i++) {
 newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
 }
