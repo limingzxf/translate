@@ -9,6 +9,7 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+
 </head>
 <body>
 
@@ -199,15 +200,49 @@ return myString;
 function get_pat_pos(newstr){
   
 var count_pat = countString(newstr,'.');
-for (var i = count_pat ; i >0; i--) {
+var list_pos = [];
+var cmp_num = [];
+var len_str = newstr.length
+if (len_str > 800 && len_str <1600)
+{
+  //console.log("less 1600");
+  cmp_num.push(800);
   
-var get_sign  = nthIndex(newstr,'.',i);
-if (get_sign<1100){
-  return get_sign;
+ // console.log("cmp : ",cmp_num);
 }
+else if (len_str > 1600 && len_str <2400)
+{
+  
+  cmp_num.push(800);
+  cmp_num.push(1600);
+  
+}
+else if (len_str > 2400 && len_str <3200)
+{
+  
+    cmp_num.push(800);
+    cmp_num.push(1600);
+    cmp_num.push(2400);
   
 }
 
+
+
+for (var k =cmp_num.length-1  ; k >-1; k--) {
+ // console.log("k : ",cmp_num[k],k )
+for (var i = count_pat ; i >0; i--) {
+var get_sign  = nthIndex(newstr,'.',i);
+if (get_sign<cmp_num[k]){
+    list_pos.push(get_sign);
+    break;
+  }
+  
+  
+}
+}
+
+
+return list_pos;
 }
 
 
@@ -221,21 +256,25 @@ var c = document.getElementById("raw").value
 	newstr= newstr.trimEnd();
 	
 //	var end_sign = "<font color=#00FF00>##@</font>";
-	var end_sign = "#############################################";
+	var end_sign = "#####";
 //	var end_sign = "##@";
 //  var newstr= newstr + end_sign;
   
 var s= "XYZ 123 ABC 456 ABC 789 ABC";
 //alert(s.length);
 newstr_len = newstr.length
-  //console.log(newstr_len)
+  console.log("string len : ",newstr_len)
   
   
 //var count_pat = countString(newstr,'.');
 //var get_sign  = nthIndex(newstr,'.',count_pat);
-if (newstr_len>1100){
+if (newstr_len>700){
 var less_num = get_pat_pos(newstr);
-newstr = replace_pos(newstr,less_num+1,'<br /><br />');
+alert("list : "+less_num);
+for (var i = 0 ; i < less_num.length; i++) {
+newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
+}
+
 }
 //console.log(less_num);
 
@@ -265,7 +304,7 @@ newstr = replace_pos(newstr,less_num+1,'<br /><br />');
      
         var oInput = document.createElement('input');
        // var Url2 = Url2.replace("<font color='lime'>##@</font>",'');
-        Url2 = Url2.replace("#############################################",'');
+        Url2 = Url2.replace("#####",'');
         
         oInput.value = Url2;
         document.body.appendChild(oInput);
@@ -321,7 +360,7 @@ newstr = replace_pos(newstr,less_num+1,'<br /><br />');
         }else{
      
         var oInput = document.createElement('input');
-        Url2 = Url2.replace("#############################################",'');
+        Url2 = Url2.replace("#####",'');
        
         oInput.value = Url2;
         document.body.appendChild(oInput);
