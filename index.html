@@ -203,47 +203,13 @@ var count_pat = countString(newstr,'.');
 var list_pos = [];
 var cmp_num = [];
 var len_str = newstr.length
-if (len_str > 800 && len_str <1600)
-{
-  //console.log("less 1600");
-  cmp_num.push(800);
-  
- // console.log("cmp : ",cmp_num);
-}
-else if (len_str > 1600 && len_str <2400)
-{
-  
-  cmp_num.push(800);
-  cmp_num.push(1600);
-  
-}
-else if (len_str > 2400 && len_str <3200)
-{
-  
-    cmp_num.push(800);
-    cmp_num.push(1600);
-    cmp_num.push(2400);
-  
-}
 
-else if (len_str > 3200 && len_str <4000)
-{
-  
-    cmp_num.push(800);
-    cmp_num.push(1600);
-    cmp_num.push(2400);
-    cmp_num.push(3200);
-  
-}
+var t_split = Math.floor(newstr.length/800);
 
-else if (len_str > 4000 && len_str <4800)
-{
-  
-    cmp_num.push(800);
-    cmp_num.push(1600);
-    cmp_num.push(2400);
-    cmp_num.push(3200);
-    cmp_num.push(4000);
+//alert (t_split);
+
+for (var j =1  ; j <t_split+1; j++) {
+  cmp_num.push(800*j);
   
 }
 
@@ -267,6 +233,22 @@ return list_pos;
 }
 
 
+async function get_clipboard (){
+//console.log("enter clipboard");
+//const data = await navigator.clipboard.read();
+const text =  await navigator.clipboard.readText();
+  if(text == ''){
+    console.log("enter clipboard 1");
+    setTimeout(get_clipboard,1000);
+  }
+   
+//console.log(text);
+//alert(text);
+document.getElementById("raw").value = text;
+hit();
+  
+}
+
 function hit(){
 var c = document.getElementById("raw").value
 //	alert(c)
@@ -281,8 +263,7 @@ var c = document.getElementById("raw").value
 //	var end_sign = "##@";
 //  var newstr= newstr + end_sign;
   
-var s= "XYZ 123 ABC 456 ABC 789 ABC";
-//alert(s.length);
+
 newstr_len = newstr.length
  // console.log("string len : ",newstr_len)
   
@@ -302,7 +283,13 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
 
 //substring
 	  document.getElementById('doc').innerHTML=newstr+end_sign;
-    
+/*if (navigator.clipboard) {
+
+  console.log('Clipboard API available');
+  get_clipboard();
+
+}
+*/
      setTimeout(cpy,1000);
 
 		  
@@ -399,8 +386,26 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
         }
     }
 
+function check_doc_txt(){
+  
+ var  get_val = window.location.search.substr(1)
+ // console.log(get_val)
+  if (get_val == "use_cb=1"){
+  
+  var check_enter ="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	  var raw_value= document.getElementById("raw").value;
+ if (raw_value==check_enter || raw_value=='' ){
+  //console.log("enter ok")
+  get_clipboard();
 
+ }
+ 
+ setTimeout(check_doc_txt,2000);
+}
+ 
+}
 
+window.onload = check_doc_txt;
 
 
   </script>
@@ -416,5 +421,7 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
 
 
 
+
+ 
   
   
