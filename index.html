@@ -412,6 +412,18 @@ function check_doc_txt(){
  
  setTimeout(check_doc_txt,2000);
 }
+else if (get_val == "use_cb=2"){
+  
+  var check_enter ="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	  var raw_value= document.getElementById("raw").value;
+ if (raw_value==check_enter || raw_value=='' ){
+  //console.log("enter ok")
+  get_clipboard();
+
+ }
+ 
+ setTimeout(check_doc_txt,500);
+}
  
 }
 
@@ -432,5 +444,6 @@ window.onload = check_doc_txt;
 
 
 
+ 
   
   
