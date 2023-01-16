@@ -1,5 +1,3 @@
-
-
  
  
 <html>
@@ -73,6 +71,14 @@ font-size: 20px;
       100%{    color: #000; }
     
 }
+@keyframes blinkingText_3{
+    0%{     background-color: #4CAF50;    }
+    49%{    background-color: #4CAF50; }
+    49%{    background-color: red; }
+    60%{    background-color: red; }
+      100%{    background-color: #4CAF50; }
+    
+}
 
 
 #doc{
@@ -81,9 +87,40 @@ font-size: 20px;
  .endsigns{
    color: "green";
  }
+ 
+ 
+  .btn_e_p{
+   
+   position: relative; 
+     margin: 0 0 0 auto;
+   
+   width: 0;
+   height: 0;
+    
+ }
+.btn_e {
+  
+  
+  position: absolute;
+  top: -25px;
+  right:20px;
+  height: 49px;
+  line-height: 49px;  
+  width: 49px;  
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+ /* cursor: pointer;*/
+  
+  
+}
+
+ 
 
 		</style>
-
 
 
 
@@ -98,14 +135,21 @@ font-size: 20px;
     <button type="button" id="clear" class="slide-two"  onclick="cls()">clear</button>
 </span>
 
+
   
 </div>
+
+
+<div class = 'btn_e_p'>
+<div class = 'btn_e' id='div_enter'>+</div>
+</div>
+
 <div class= "div_p" >
 
 
 </div>
-    <button type="button" id="cp" class="slide-two copys"  onclick="cpy2()">copy</button>
 
+    <button type="button" id="cp" class="slide-two copys"  onclick="cpy2()">copy</button>
 
 
 
@@ -428,6 +472,21 @@ else if (get_val == "use_cb=2"){
 }
  
 }
+
+
+
+document.getElementById('div_enter').addEventListener('click', cl_Div);
+
+function cl_Div() {
+
+textarea_s = document.getElementById('raw').value;
+document.getElementById('raw').value= textarea_s + '\n\n';
+enter_reslut = document.getElementById("div_enter");
+enter_reslut.style.animation="blinkingText_3 0.3s 20 forwards";
+setTimeout(set_pause,1000,"div_enter");
+
+}
+
 
 window.onload = check_doc_txt;
 
