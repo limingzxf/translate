@@ -1,4 +1,5 @@
- 
+
+
 <html>
 <head>
 
@@ -38,11 +39,11 @@ margin-top: 5.5px;
 
 .p_size{
 font-size: 25px;
-  
+
 }
 .textarea_txt{
 font-size: 20px;
-  
+
 }
 .wait{
   font-size: 15px;
@@ -60,7 +61,7 @@ font-size: 20px;
     49%{    color: transparent; }
     60%{    color: transparent; }
       100%{    color: #000; }
-    
+
 }
 @keyframes blinkingText_2{
     0%{     color: #00FF00;    }
@@ -68,7 +69,7 @@ font-size: 20px;
     49%{    color: transparent; }
     60%{    color: transparent; }
       100%{    color: #000; }
-    
+
 }
 @keyframes blinkingText_3{
     0%{     background-color: #4CAF50;    }
@@ -76,7 +77,7 @@ font-size: 20px;
     49%{    background-color: red; }
     60%{    background-color: red; }
       100%{    background-color: #4CAF50; }
-    
+
 }
 
 
@@ -86,26 +87,26 @@ font-size: 20px;
  .endsigns{
    color: "green";
  }
- 
- 
+
+
   .btn_e_p{
-   
-   position: relative; 
+
+   position: relative;
      margin: 0 0 0 auto;
-   
+
    width: 0;
    height: 0;
-    
+
  }
 .btn_e {
-  
-  
+
+
   position: absolute;
   top: -25px;
   right:20px;
   height: 49px;
-  line-height: 49px;  
-  width: 49px;  
+  line-height: 49px;
+  width: 49px;
   font-size: 2em;
   font-weight: bold;
   border-radius: 50%;
@@ -113,29 +114,29 @@ font-size: 20px;
   color: white;
   text-align: center;
  /* cursor: pointer;*/
-  
-  
+
+
 }
 
- 
+
 
 		</style>
 
 
 
 <div class= "div_p" >
-  
+
 <span class="ta2">
-  
+
     <button type="button" id="submit" class="slide-two"  onclick="hit()">translate</button>
-   
+
 </span>
 <span class="ta2">
     <button type="button" id="clear" class="slide-two"  onclick="cls()">clear</button>
 </span>
 
 
-  
+
 </div>
 
 
@@ -155,9 +156,9 @@ font-size: 20px;
 <br/>
 <div class="alert alert-success" id="success-alert">
 
-  
+
   <p class="wait">请等一下! </p>
-  
+
 </div>
 
 
@@ -176,11 +177,11 @@ font-size: 20px;
 
   <script>
  //   var con= document.getElementById('raw').value();
- 
- 
+
+
       $(document).ready(function() {
   $("#success-alert").hide();
-  
+
 });
 
       function showAlert() {
@@ -196,18 +197,18 @@ function addcss(styles){
 var styleSheet = document.createElement("style")
 styleSheet.innerText = styles
 document.head.appendChild(styleSheet)
-  
-  
+
+
 }
-    
+
 function cls(){
 //alert("clear");
 	  document.getElementById('raw').value="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 	  document.getElementById('doc').innerHTML="";
 
-		  
+
 		}
-		
+
 function nthIndex(str, pat, n){
     var L= str.length, i= -1;
     while(n-- && i++<L){
@@ -235,15 +236,15 @@ function countString(str, letter) {
 
 
 function replace_pos(myString,pos,character){
-myString = myString.substring(0,pos) + 
-           character + 
+myString = myString.substring(0,pos) +
+           character +
            myString.substring(pos, myString.length);
 return myString;
-  
+
 }
 
 function get_pat_pos(newstr){
-  
+
 var count_pat = countString(newstr,'.');
 var list_pos = [];
 var cmp_num = [];
@@ -255,7 +256,7 @@ var t_split = Math.floor(newstr.length/800);
 
 for (var j =1  ; j <t_split+1; j++) {
   cmp_num.push(800*j);
-  
+
 }
 
 
@@ -268,8 +269,8 @@ if (get_sign<cmp_num[k]){
     list_pos.push(get_sign);
     break;
   }
-  
-  
+
+
 }
 }
 
@@ -283,15 +284,15 @@ async function get_clipboard (){
 //const data = await navigator.clipboard.read();
 const text =  await navigator.clipboard.readText();
   if(text == ''){
-    console.log("enter clipboard 1");
+  //  console.log("enter clipboard 1");
     setTimeout(get_clipboard,1000);
   }
-   
+
 //console.log(text);
 //alert(text);
 document.getElementById("raw").value = text;
 hit();
-  
+
 }
 
 function hit(){
@@ -302,17 +303,17 @@ var c = document.getElementById("raw").value
   //在此处，正则表达式的末尾有个g，它表示match源字符串str中所有匹配项。
 //这里如果没有g，那么也只能匹配到第一个错别字”背景“，只有加了这个g，才能匹配到所有的”背景“。
 	newstr= newstr.trimEnd();
-	
+
 //	var end_sign = "<font color=#00FF00>##@</font>";
 	var end_sign = "#####";
 //	var end_sign = "##@";
 //  var newstr= newstr + end_sign;
-  
+
 
 newstr_len = newstr.length
  // console.log("string len : ",newstr_len)
-  
-  
+
+
 //var count_pat = countString(newstr,'.');
 //var get_sign  = nthIndex(newstr,'.',count_pat);
 if (newstr_len>700){
@@ -337,28 +338,28 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
 */
      setTimeout(cpy,1000);
 
-		  
+
 		}
-		
-  function isChinese(temp) 
-  { 
-  var re=/[^\u4e00-\u9fa5]/; 
-  if(re.test(temp)) return false; 
-  return true; 
-  } 
-  
+
+  function isChinese(temp)
+  {
+  var re=/[^\u4e00-\u9fa5]/;
+  if(re.test(temp)) return false;
+  return true;
+  }
+
 
 
 		//为submit绑定点击事件，将name的值在也页面弹窗显示
   function cpy2() {
         var Url2=document.getElementById('doc').innerText;
-        
-        
-     
+
+
+
         var oInput = document.createElement('input');
        // var Url2 = Url2.replace("<font color='lime'>##@</font>",'');
         Url2 = Url2.replace("#####",'');
-        
+
         oInput.value = Url2;
         document.body.appendChild(oInput);
         oInput.select(); // 选择对象
@@ -373,29 +374,29 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
         //cp_reslut.style.color="#000";
         //element.style.//addcss(styles_2);
         //console.log("复制成功");
-        
+
     }
     function set_pause(id){
       //cp_reslut.textContent = "success";
        document.getElementById(id).style.animation="none";
-        
+
  //       document.getElementById(id).style.animationPlayState = 'paused';
-        
-      
+
+
     }
     function set_color(id){
       //cp_reslut.textContent = "success";
      //   document.getElementById(id).style.opacity = 0.5;
-        
+
         //document.getElementById(id).style.animation="blinkingText_black 1s infinite";
         //document.getElementById(id).style.anitmatation-direction="normal";
-        
-        document.getElementById(id).style.color = rgba(0,0,0,1) ; 
-        
-      
+
+        document.getElementById(id).style.color = rgba(0,0,0,1) ;
+
+
     }
-    
-    
+
+
 
 
 
@@ -404,7 +405,7 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
 
   function cpy() {
         var Url2=document.getElementById('doc').innerText;
-        
+
         var really_chiness = 0;
         var len_s = Url2.length
         for (var k = 0 ; k < len_s; k++) {
@@ -415,16 +416,17 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
           }
 
         if(!really_chiness){
-          
+
         doc_reslut = document.getElementById("doc");
         doc_reslut.style.animation="blinkingText 0.3s 20 forwards";
       //  doc_reslut.style.animation-fill-mode="forwards";
        setTimeout(set_pause,2000,"doc");
         }else{
-     
+
         var oInput = document.createElement('input');
         Url2 = Url2.replace("#####",'');
-       
+        Url2 = Url2.replace("＃＃＃＃＃",'');
+
         oInput.value = Url2;
         document.body.appendChild(oInput);
         oInput.select(); // 选择对象
@@ -437,16 +439,16 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
         setTimeout(set_pause,1000,"doc");
      //   setTimeout(set_color,100,"cp");
       //  cp_reslut.textContent = "copy";
-   
+
         }
     }
 
 function check_doc_txt(){
-  
+
  var  get_val = window.location.search.substr(1)
  // console.log(get_val)
   if (get_val == "use_cb=1"){
-  
+
   var check_enter ="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 	  var raw_value= document.getElementById("raw").value;
  if (raw_value==check_enter || raw_value=='' ){
@@ -454,22 +456,22 @@ function check_doc_txt(){
   get_clipboard();
 
  }
- 
+
  setTimeout(check_doc_txt,2000);
 }
 else if (get_val == "use_cb=2"){
-  
+//alert(1)
   var check_enter ="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 	  var raw_value= document.getElementById("raw").value;
  if (raw_value==check_enter || raw_value=='' ){
-  //console.log("enter ok")
+ //console.log("enter ok")
   get_clipboard();
 
  }
- 
+
  setTimeout(check_doc_txt,500);
 }
- 
+
 }
 
 
@@ -492,8 +494,8 @@ window.onload = check_doc_txt;
 
   </script>
 
-  
-  
+
+
 
 </body>
 
@@ -504,6 +506,4 @@ window.onload = check_doc_txt;
 
 
 
- 
-  
-  
+
