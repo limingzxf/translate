@@ -1,7 +1,6 @@
 
 
 
-
 <html>
 <head>
 
@@ -17,7 +16,7 @@
 
 
 
-<textarea  rows="10" cols="30" wrap="off" style="overflow:scroll;" class="textarea_txt" name="raw_txt" id = "raw" onchange="hit()"></textarea>
+<textarea  rows="10" cols="30" wrap="off" style="overflow:scroll;" class="textarea_txt" name="raw_txt" id = "raw" oninput="hit()"></textarea>
 <style type="text/css">
 .slide-two{
 
@@ -180,7 +179,8 @@ font-size: 20px;
   <script>
  //   var con= document.getElementById('raw').value();
 
-
+window.buffer=[]
+window.insert_513=false
       $(document).ready(function() {
   $("#success-alert").hide();
 
@@ -281,19 +281,51 @@ return list_pos;
 }
 
 
+      function check_in(item,array) {
+
+      var i = array.length;
+
+      while (i--) {
+         if (array[i] === item) return i;
+      }
+      return -1;
+   }
 async function get_clipboard (){
 //console.log("enter clipboard");
 //const data = await navigator.clipboard.read();
 const text =  await navigator.clipboard.readText();
   if(text == ''){
   //  console.log("enter clipboard 1");
-    setTimeout(get_clipboard,1000);
+ //   setTimeout(get_clipboard,1000);
+  }else{
+if(buffer.length<4){
+  buffer.push(text)
+  document.getElementById("raw").value = text;
+hit();
+}else{
+  if(check_in(text,buffer)!==-1){
+   // alert("in")
+  }else{
+   // alert("not in")
+    buffer.shift();
+    buffer.push(text)
+    if(insert_513){
+  document.getElementById("raw").value += text;
+  insert_513=false
+      
+    }else{
+      document.getElementById("raw").value = text;
+      
   }
-
+  hit();
+  //  alert(JSON.stringify(buffer))
+  }
 //console.log(text);
 //alert(text);
-document.getElementById("raw").value = text;
-hit();
+//document.getElementById("raw").value = text;
+//hit();
+}
+}
 
 }
 
@@ -435,6 +467,9 @@ newstr = replace_pos(newstr,less_num[i]+1,'<br /><br />');
         document.execCommand("Copy"); // 执行浏览器复制命令
         oInput.className = 'oInput';
         oInput.style.display='none';
+     //   alert(461)
+     buffer.shift();
+    buffer.push(Url2)
    //     console.log("复制成功");
            cp_reslut = document.getElementById("doc");
         cp_reslut.style.animation="blinkingText_2 0.3s 20 forwards";
@@ -465,11 +500,11 @@ else if (get_val == "use_cb=2"){
 //alert(1)
   var check_enter ="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 	  var raw_value= document.getElementById("raw").value;
- if (raw_value==check_enter || raw_value=='' ){
+// if (raw_value==check_enter || raw_value=='' ){
  //console.log("enter ok")
   get_clipboard();
 
- }
+// }
 
  setTimeout(check_doc_txt,500);
 }
@@ -484,6 +519,7 @@ function cl_Div() {
 
 textarea_s = document.getElementById('raw').value;
 document.getElementById('raw').value= textarea_s + '\n\n';
+insert_513=true;
 enter_reslut = document.getElementById("div_enter");
 enter_reslut.style.animation="blinkingText_3 0.3s 20 forwards";
 setTimeout(set_pause,1000,"div_enter");
@@ -509,3 +545,4 @@ window.onload = check_doc_txt;
 
 
 
+	
