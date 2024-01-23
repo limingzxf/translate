@@ -55,6 +55,9 @@ font-size: 20px;
 #cp{
     animation:blinkingText 0.3s 0;
 }
+#eng{
+    animation:blinkingText 0.3s 0;
+}
 @keyframes blinkingText{
     0%{     color: #000;    }
     49%{    color: #000; }
@@ -125,18 +128,12 @@ font-size: 20px;
 
 
 <div class= "div_p" >
-
 <span class="ta2">
-
     <button type="button" id="submit" class="slide-two"  onclick="hit()">translate</button>
-
 </span>
 <span class="ta2">
     <button type="button" id="clear" class="slide-two"  onclick="cls()">clear</button>
 </span>
-
-
-
 </div>
 
 
@@ -145,11 +142,17 @@ font-size: 20px;
 </div>
 
 <div class= "div_p" >
-
-
 </div>
 
+<div class= "div_p" >
+<span class="ta2">
     <button type="button" id="cp" class="slide-two copys"  onclick="cpy2()">copy</button>
+</span>
+<span class="ta2">
+    <button type="button" id="eng" class="slide-two"  onclick="eng()">eng</button>
+</span>
+</div>
+
 
 
 
@@ -328,6 +331,41 @@ hit();
 
 }
 
+function eng(){
+var c = document.getElementById("raw").value
+	var newstr = c.replace(/\n/g, ' ');
+	 newstr = newstr.replace(/</g, '&lt;');
+	newstr= newstr.trimEnd();
+newstr_len = newstr.length
+ //var get_sign  = nthIndex(newstr,'.',count_pat);
+if (newstr_len>700){
+var less_num = get_pat_pos(newstr);
+//alert("list : "+less_num);
+for (var i = 0 ; i < less_num.length; i++) {
+newstr = replace_pos(newstr,less_num[i]+1,'\n');
+}
+}
+
+
+
+        var oInput = document.createElement('input');
+       // var Url2 = Url2.replace("<font color='lime'>##@</font>",'');
+       // Url2 = Url2.replace("#####",'');
+        if(newstr==''){
+          return
+        }
+        oInput.value = newstr;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display='none';
+        cp_reslut = document.getElementById("eng");
+        cp_reslut.style.animation="blinkingText 0.3s 20 forwards";
+        setTimeout(set_pause,1000,"eng");
+     //   setTimeout(set_color,100,"cp");
+        cp_reslut.textContent = "eng";
+		}
 function hit(){
 var c = document.getElementById("raw").value
 //	alert(c)
@@ -544,3 +582,4 @@ window.onload = check_doc_txt;
 
 
 
+	
