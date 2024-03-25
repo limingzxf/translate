@@ -1,8 +1,5 @@
 
 
-
-
-
 <html>
 <head>
   
@@ -392,7 +389,11 @@ Timeout_1=setTimeout(()=>{
 },10000)
 var c = document.getElementById("raw").value
 var newstr = c.replace(/\n/g, ' ');
-var newstr = c.replace(/ /g, '');
+
+newstr = newstr.replace(/ /g, '');
+newstr = newstr.replace(/>/g, '/');
+newstr = newstr.replace(/Sq/g, '->∞ ');
+newstr = newstr.replace(/L/g, '∫ ');
 newstr = newstr.replace(/</g, '&lt;');
 
 
